@@ -1,6 +1,6 @@
-// import { useState } from "react";
+import { useState } from "react";
 import React from "react";
-import { Formik } from 'formik';
+// import { Formik } from 'formik';
 
 
 const ContactForm = () => {
@@ -11,8 +11,8 @@ const ContactForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="" name="" value='' />
-      <input type="" name="" value='' />
+      <input type="" name=""/>
+      <input type="" name="" />
       <button type="submit">Add contact</button>
     </form>
   );
