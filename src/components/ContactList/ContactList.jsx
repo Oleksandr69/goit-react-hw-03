@@ -1,18 +1,18 @@
-import FriendListItem from "../FriendListItem/FriendListItem";
-import css from './FriendList.module.css'
+import css from './ContactList.module.css'
+import Contact from '../Contact/Contact';
 
-const FriendList = ({ friends }) => {
-    return <ul className={css.friendList}>
-        {friends.map((friend) => {
-            return (<li key={friend.id} className={css.friendCard}>
-                <FriendListItem
-                    avatar={friend.avatar}
-                    name={friend.name}
-                    isOnline={friend.isOnline}
+const ContactList = ({ cardList, onDelete }) => {
+   
+    return <ul className={css.list}>
+        {cardList.map((card) => {
+            return (<li key={card.id} className={css.cardItem}>
+                <Contact
+                    contact={card}
+                    onDelete={onDelete}
                 />
             </li>);
         })}
     </ul>;
 };
 
-export default FriendList;
+export default ContactList;

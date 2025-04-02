@@ -1,8 +1,11 @@
-import React from 'react'
-// import { useEffect, useState } from 'react'
+import React, { useState } from 'react'
+
 import './App.css'
 
 import ContactForm from '../ContactForm/ContactForm'
+import SearchBox from '../SearchBox/SearchBox'
+import ContactList from '../ContactList/ContactList'
+import cardList from '../cardList.json'
 
 const App = () => {
   
@@ -14,7 +17,7 @@ const App = () => {
   //     } else {
   //       return { good: 0, neutral: 0, bad: 0 };
   //     }
-  //   } 
+  //   }
   // );
 
   // const totalFeedback = (counter.good + counter.neutral + counter.bad);
@@ -32,27 +35,36 @@ const App = () => {
   //   // console.log({...counter});
   //   window.localStorage.setItem("saved-clicks", JSON.stringify({...counter}));
   // }, [counter]);
+  
+  const [cards, setCards] = useState(cardList);
+
+  const addContact = (newContact) => {
+    console.log(newContact);
+   
+    setCards((prevCards) => {
+      return [...prevCards, newContact];
+    })
+  };
+  
+  const deleteContact = (contactId) => { 
+    setCards((prevCards) => {
+      return prevCards.filter((card) => card.id !== contactId);
+    })
+  };
 
     return (
     <div>
-      <ContactForm
-      />
-      {/* <Options
-          good={counter.good}
-          neutral={counter.neutral}
-          bad={counter.bad}
-          totalFeedback = {totalFeedback}
-        onUpdate={updateFeedback}
+        <ContactForm
+         
+          onAdd={addContact}
         />
-        {totalFeedback == 0 ? (<Notification
-        />) :
-          (<Feedback
-            good={counter.good}
-            neutral={counter.neutral}
-            bad={counter.bad}
-            total={totalFeedback}
-            positive={positiveFeedback}
-          />)} */}
+      <SearchBox
+        />
+        <ContactList
+          cardList={cards}
+          onDelete={deleteContact}
+        />
+      
     </div>
   );
 };

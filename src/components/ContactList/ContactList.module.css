@@ -1,0 +1,11 @@
+.list {
+  display: flex;
+  flex-direction: row;
+
+  gap: 8px;
+}
+
+.cardItem {
+  display: flex;
+  flex-direction: row;
+}
