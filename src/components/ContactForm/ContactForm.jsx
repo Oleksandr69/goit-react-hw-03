@@ -3,6 +3,7 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { nanoid } from "nanoid";
 import * as Yup from "yup";
+import css from  './ContactForm.module.css'
 
 
 
@@ -16,10 +17,8 @@ const ContactForm = ({onAdd}) => {
   };
 
   const FeedbackSchema = Yup.object().shape({
-  name: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required("Required"),
-  number: Yup.number().required("Required"),
-  // message: Yup.string().min(3, "Too short").max(256, "Too long").required("Required"),
-  // level: Yup.string().oneOf(["good", "neutral", "bad"]).required("Required")
+  name: Yup.string().trim().min(2, "Too short!").max(50, "Too Long!").required("Required!"),
+  number: Yup.string().min(7, "Too short!").max(10, "Too Long!").required("Required!"),
 });
 
   const handleSubmit = (values, actions) => {
@@ -37,20 +36,21 @@ const ContactForm = ({onAdd}) => {
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={FeedbackSchema}>
       <Form>
-        
-        <div>
+        <div className={css.formik}>
+        <div className={css.field}>
           <label htmlFor={nameFieldId}>Name</label>
-          <Field type="text" name="name" id={nameFieldId} />
-          <ErrorMessage name="name" component="span" />
+          <Field type="text" name="name" id={nameFieldId} className={ css.input} />
+          <ErrorMessage name="name" component="span" className={css.message} />
         </div>
 
-        <div>
+        <div className={css.field}>
           <label htmlFor={telFieldId}>Number</label>
-          <Field type='text' name="number" id={telFieldId} />
-          <ErrorMessage name="number" component="span" />
+          <Field type='number' name="number" id={telFieldId} className={ css.input} />
+          <ErrorMessage name="number" component="span" className={css.message} />
         </div>
 
-        <button type="submit">Add contact</button>
+          <button type="submit" className={css.button}>Add contact</button>
+        </div>
       </Form>
     </Formik>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import './App.css'
 
@@ -8,35 +8,27 @@ import ContactList from '../ContactList/ContactList'
 import cardList from '../cardList.json'
 
 const App = () => {
-  
-  // const [counter, setCounter] = useState(() => {
-  //   const savedClicks = window.localStorage.getItem("saved-clicks");
-  //   // console.log(savedClicks);
-  //     if (savedClicks !== null) {
-  //       return JSON.parse(savedClicks);
-  //     } else {
-  //       return { good: 0, neutral: 0, bad: 0 };
-  //     }
-  //   }
-  // );
 
-  // const totalFeedback = (counter.good + counter.neutral + counter.bad);
-  // const positiveFeedback = Math.round((counter.good / totalFeedback) * 100);
-  
-  // const updateFeedback = (feedbackType) => {
-  //   if (feedbackType == 'reset') {
-  //     setCounter({ good: 0, neutral: 0, bad: 0 });
-  //   } else {
-  //     setCounter({ ...counter, [feedbackType]: counter[feedbackType] + 1 });
-  //   }
-  // }
+  const [cards, setCards] = useState(() => {
+    const savedCards = window.localStorage.getItem("saved-cardList");
+    console.log(JSON.parse(savedCards));
+    if (savedCards !== null) {
+      return JSON.parse(savedCards);
+      } else {
+        return cardList;
+      }
+  });
 
-  // useEffect(() => {
-  //   // console.log({...counter});
-  //   window.localStorage.setItem("saved-clicks", JSON.stringify({...counter}));
-  // }, [counter]);
-  
-  const [cards, setCards] = useState(cardList);
+  const [search, setSearch] = useState('');
+
+  const filteredList = cards.filter((card) => 
+      card.name.toLowerCase().includes(search.toLowerCase())
+  );
+
+  useEffect(() => {
+  console.log({...filteredList});
+  window.localStorage.setItem("saved-cardList", JSON.stringify(filteredList));
+  }, [filteredList]);
 
   const addContact = (newContact) => {
     console.log(newContact);
@@ -52,16 +44,17 @@ const App = () => {
     })
   };
 
-    return (
-    <div>
+      return (
+      <div>
         <ContactForm
-         
           onAdd={addContact}
         />
-      <SearchBox
+        <SearchBox
+          value={search}
+          onSearch={setSearch}
         />
         <ContactList
-          cardList={cards}
+          cardList={filteredList}
           onDelete={deleteContact}
         />
       

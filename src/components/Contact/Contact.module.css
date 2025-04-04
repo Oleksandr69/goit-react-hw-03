@@ -1,14 +1,21 @@
 .item {
   border: 1px solid black;
   border-radius: 4px;
-  padding: 4px;
+  padding: 8px;
   display: flex;
-  align-items: center;
+  flex-direction: row;
+  /* align-items: center; */
   justify-content: space-between;
-  gap: 12px;
+
+  width: 360px;
 }
 
 .btn {
   border: 1px solid black;
   border-radius: 4px;
+}
+
+.text {
+  font-size: 18px;
+  margin: 0;
 }
