@@ -30,7 +30,7 @@ const App = () => {
   }, [filteredList]);
 
   const addContact = (newContact) => {
-    console.log(newContact);
+    // console.log(newContact);
    
     setCards((prevCards) => {
       return [...prevCards, newContact];
