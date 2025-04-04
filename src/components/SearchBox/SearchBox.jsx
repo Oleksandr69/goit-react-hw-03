@@ -4,7 +4,7 @@ import css from './SearchBox.module.css'
 const SearchBox = ({value, onSearch}) => {
     return (
     <div className={css.search}>
-        <p >Search by name.</p>
+        <p >Find contacts by name.</p>
             <input
                 type='text'
                 value={value}
