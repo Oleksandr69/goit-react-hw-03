@@ -11,7 +11,7 @@ const App = () => {
 
   const [cards, setCards] = useState(() => {
     const savedCards = window.localStorage.getItem("saved-cardList");
-    console.log(JSON.parse(savedCards));
+    // console.log(JSON.parse(savedCards));
     if (savedCards !== null) {
       return JSON.parse(savedCards);
       } else {
@@ -26,7 +26,6 @@ const App = () => {
   );
 
   useEffect(() => {
-  console.log({...filteredList});
   window.localStorage.setItem("saved-cardList", JSON.stringify(filteredList));
   }, [filteredList]);
 
